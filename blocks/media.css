@@ -1,11 +1,13 @@
 @media screen and (max-width: 933px) {
+  .page__container {
+    padding: 45px 40px 60px;
+  }
+
   .footer__copyright {
     margin: 67px auto 0;
     max-width: 581px;
   }
-}
 
-@media screen and (max-width: 780px) {
   .profile__info {
     grid-template-columns: minmax(auto, 245px) 24px;
     align-items: inherit;
@@ -14,13 +16,15 @@
   .profile__title {
     font-size: 27px;
   }
+}
 
+@media screen and (max-width: 780px) {
   .profile__add-button {
     width: 50px;
   }
 }
 
-@media screen and (max-width: 634px) {
+@media screen and (max-width: 677px) {
   .profile {
     flex-direction: column;
     justify-content: center;
