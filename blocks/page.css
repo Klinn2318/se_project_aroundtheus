@@ -1,0 +1,13 @@
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  font-family: Inter, Arial, sans-serif;
+  background-color: black;
+  color: #fff;
+}
+
+.page__container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 45px 19px 60px;
+}
