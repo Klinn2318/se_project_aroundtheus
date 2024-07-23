@@ -1,4 +1,4 @@
-.cards {
+.card {
   color: #000;
   margin: 0;
   padding: 0;
@@ -14,7 +14,7 @@
   justify-content: center;
 }
 
-.card {
+.card__item {
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -47,4 +47,15 @@
   width: 24px;
   height: 18px;
   border: none;
+  transition: all 0.5s;
+}
+
+.card__like:hover {
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 933px) {
+  .card {
+    margin: 0 2%;
+  }
 }

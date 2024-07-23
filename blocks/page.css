@@ -9,17 +9,17 @@
 .page__container {
   max-width: 880px;
   margin: 0 auto;
-  padding: 45px 19px 60px;
+  padding: 45px 0 60px;
 }
 
 @media screen and (max-width: 933px) {
   .page__container {
-    padding: 45px 40px 60px;
+    padding: 45px 0 60px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .page__container {
-    padding: 28px 19px 36px;
+    padding: 28px 0 36px;
   }
 }
