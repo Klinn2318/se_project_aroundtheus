@@ -11,3 +11,15 @@
   margin: 0 auto;
   padding: 45px 19px 60px;
 }
+
+@media screen and (max-width: 933px) {
+  .page__container {
+    padding: 45px 40px 60px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .page__container {
+    padding: 28px 19px 36px;
+  }
+}

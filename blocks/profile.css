@@ -81,3 +81,51 @@
 .button__mod:hover {
   opacity: 0.5;
 }
+
+@media screen and (max-width: 933px) {
+  .profile__info {
+    grid-template-columns: minmax(auto, 245px) 24px;
+    align-items: inherit;
+  }
+
+  .profile__title {
+    font-size: 27px;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .profile__add-button {
+    width: 50px;
+  }
+}
+
+@media screen and (max-width: 677px) {
+  .profile {
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .profile__info {
+    justify-content: center;
+    grid-template-columns: minmax(auto, 196px) 24px;
+    justify-items: center;
+    align-items: inherit;
+    gap: 14px 10px;
+  }
+
+  .profile__title {
+    font-size: 23px;
+  }
+
+  .profile__description {
+    max-width: 282px;
+    font-size: 14px;
+  }
+
+  .profile__add-button {
+    margin: 0;
+    width: 100%;
+    max-width: 282px;
+  }
+}
