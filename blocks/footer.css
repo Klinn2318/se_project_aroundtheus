@@ -3,3 +3,17 @@
   color: #545454;
   margin: 67px 0 0;
 }
+
+@media screen and (max-width: 933px) {
+  .footer__copyright {
+    margin: 67px auto 0;
+    max-width: 581px;
+  }
+}
+
+@media screen and (max-width: 677px) {
+  .footer__copyright {
+    margin: 48px auto 0;
+    max-width: 282px;
+  }
+}

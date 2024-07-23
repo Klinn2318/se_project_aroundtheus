@@ -5,3 +5,10 @@
   margin-bottom: 40px;
   border-bottom: solid 1px #545454;
 }
+
+@media screen and (max-width: 480px) {
+  .header__image {
+    width: 126px;
+    height: 24px;
+  }
+}
