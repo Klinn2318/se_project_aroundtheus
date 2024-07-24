@@ -14,47 +14,6 @@
   justify-content: center;
 }
 
-.gallery__item {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-}
-
-.gallery__item_image {
-  border-radius: 10px 10px 0 0;
-  width: 100%;
-}
-
-.gallery__item_description {
-  background-color: #fff;
-  border-radius: 0 0 10px 10px;
-  padding: 25px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.gallery__description_title {
-  font-weight: 900;
-  margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-wrap: nowrap;
-}
-
-.gallery__description_like {
-  background: transparent url(../images/heart_icon.svg) no-repeat center;
-  width: 24px;
-  height: 18px;
-  border: none;
-  transition: all 0.5s;
-  cursor: pointer;
-}
-
-.gallery__description_like:hover {
-  opacity: 0.5;
-}
-
 @media screen and (max-width: 933px) {
   .gallery {
     margin: 0 2%;
