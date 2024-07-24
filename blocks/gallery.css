@@ -1,10 +1,10 @@
-.card {
+.gallery {
   color: #000;
   margin: 0;
   padding: 0;
 }
 
-.card__list {
+.gallery__list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -14,26 +14,18 @@
   justify-content: center;
 }
 
-.card__item {
+.gallery__item {
   display: flex;
   flex-direction: column;
   margin: 0;
 }
 
-.card__image {
+.gallery__item_image {
   border-radius: 10px 10px 0 0;
   width: 100%;
 }
 
-.card__title {
-  font-weight: 900;
-  margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-wrap: nowrap;
-}
-
-.card__description {
+.gallery__item_description {
   background-color: #fff;
   border-radius: 0 0 10px 10px;
   padding: 25px 20px;
@@ -42,7 +34,15 @@
   align-items: center;
 }
 
-.card__like {
+.gallery__description_title {
+  font-weight: 900;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+
+.gallery__description_like {
   background: transparent url(../images/heart_icon.svg) no-repeat center;
   width: 24px;
   height: 18px;
@@ -51,12 +51,12 @@
   cursor: pointer;
 }
 
-.card__like:hover {
+.gallery__description_like:hover {
   opacity: 0.5;
 }
 
 @media screen and (max-width: 933px) {
-  .card {
+  .gallery {
     margin: 0 2%;
   }
 }
