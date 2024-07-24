@@ -16,6 +16,7 @@ This project is made so all the elements are displayed correctly on popular scre
 - [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
 
 **Technologies**
+
 In this project, I used HTML and CSS to achieve a responsive design. Unlike previous projects, this one adapts seamlessly to any screen size, ensuring optimal display without issues. I minimized the use of media queries by leveraging CSS Grid properties.
 
 **Images**
