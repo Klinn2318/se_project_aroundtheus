@@ -2,11 +2,15 @@
   width: 100%;
   height: 27px;
   margin: 0;
-  padding: 0 0 13px;
+  padding: 0 0 13px 5px;
   box-sizing: border-box;
   border: none;
   border-bottom: solid 1px rgba(0, 0, 0, 0.2);
 }
+
+/* .form__input:focus-visible {
+  border-block-color: rgb(53, 94, 198);
+} */
 
 .form__input:not(:last-of-type) {
   margin-bottom: 28.74px;

@@ -31,7 +31,7 @@
             <button
               type="button"
               aria-label="Edit"
-              class="profile__edit-button profile__buttons"
+              class="profile__edit-button profile__buttons js-profile-edit-button"
             ></button>
             <p class="profile__description">Explore</p>
           </div>
@@ -140,9 +140,12 @@
         <p class="footer__copyright">© 2022 Around The U.S.</p>
       </footer>
     </div>
-    <div class="modal">
+    <div class="modal js-modal">
       <div class="modal__container">
-        <button type="button" class="modal__close-button"></button>
+        <button
+          type="button"
+          class="modal__close-button js-modal-close-button"
+        ></button>
         <form class="modal__form form">
           <h2 class="form__title">Edit profile</h2>
           <input
