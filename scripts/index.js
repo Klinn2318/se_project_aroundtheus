@@ -40,13 +40,13 @@ const templateGallery =
   document.querySelector("#js-card-template").content.firstElementChild;
 
 function closePopUp() {
-  modal.classList.remove("modal__opened");
+  modal.classList.remove("modal_opened");
 }
 
 profileEditButton.addEventListener("click", () => {
   inputDescription.value = profileDescription.textContent;
   inputTitle.value = profileTitle.textContent;
-  return modal.classList.add("modal__opened");
+  return modal.classList.add("modal_opened");
 });
 
 modalCloseButton.addEventListener("click", closePopUp);
