@@ -37,103 +37,13 @@
           </div>
           <button
             type="button"
+            id="js-profile-add-button"
             aria-label="Add-button"
             class="profile__add-button profile__buttons"
           ></button>
         </section>
         <section class="gallery">
-          <ul class="gallery__list">
-            <li class="card">
-              <img
-                src="./images/yosemite-valley.jpg"
-                alt="yosemite-valley"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Yosemite-valley</h2>
-                <button
-                  type="button"
-                  aria-label="Like"
-                  class="card__like"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/lake-louise.jpg"
-                alt="lake-louise"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Lake Louise</h2>
-                <button
-                  type="button"
-                  aria-label="Like"
-                  class="card__like"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/bald-mountains.jpg"
-                alt="bald-mountains"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Bald Mountains</h2>
-                <button
-                  type="button"
-                  aria-label="Like"
-                  class="card__like"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/latemar.jpg"
-                alt="Latemar"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Latemar</h2>
-                <button
-                  type="button"
-                  aria-label="Like"
-                  class="card__like"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/vanoise-national-park.jpg"
-                alt="vanoise-national-park"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Vanoise National Park</h2>
-                <button
-                  type="button"
-                  aria-label="Like"
-                  class="card__like"
-                ></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                src="./images/lago-di-braies.jpg"
-                alt="lake-louise"
-                class="card__image"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Lago di Braies</h2>
-                <button
-                  type="button"
-                  aria-label="Like"
-                  class="card__like"
-                ></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="gallery__list" id="js-gallery-list"></ul>
         </section>
       </main>
       <footer class="footer">
@@ -146,24 +56,35 @@
           type="button"
           class="modal__close-button js-modal-close-button"
         ></button>
-        <form class="modal__form form">
+        <form class="modal__form form" id="js-modal-form">
           <h2 class="form__title">Edit profile</h2>
           <input
             type="text"
             name="title"
             class="form__input"
-            placeholder="Jacques Cousteau"
+            id="input-title"
+            placeholder="Name"
           />
           <input
             type="text"
             name="description"
+            id="input-description"
             class="form__input"
-            placeholder="Explorer"
+            placeholder="Description"
           />
           <button type="submit" class="form__save-button">Save</button>
         </form>
       </div>
     </div>
+    <template id="js-card-template">
+      <li class="card">
+        <img src="" alt="" class="card__image" />
+        <div class="card__description">
+          <h2 class="card__title"></h2>
+          <button type="button" aria-label="Like" class="card__like"></button>
+        </div>
+      </li>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
