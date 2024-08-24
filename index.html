@@ -78,12 +78,22 @@
     </div>
     <template id="js-card-template">
       <li class="card">
+        <button type="button" class="card__delete-button"></button>
         <img src="" alt="" class="card__image" />
         <div class="card__description">
           <h2 class="card__title"></h2>
           <button type="button" aria-label="Like" class="card__like"></button>
         </div>
       </li>
+    </template>
+    <template id="image-modal">
+      <div class="image__modal">
+        <div class="image__content">
+          <img class="image__picture" src="" alt="" />
+          <p class="image__name"></p>
+          <button class="image__close-btn"></button>
+        </div>
+      </div>
     </template>
     <script src="./scripts/index.js"></script>
   </body>
