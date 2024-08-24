@@ -66,10 +66,12 @@ function getImageModal(element, imageData) {
   const imageModal = element.querySelector(".image__modal");
   const imagePic = element.querySelector(".image__picture");
   const imageName = element.querySelector(".image__name");
+  const imageCloseBtn = element.querySelector(".modal__close-button");
 
   imagePic.src = imageData.link;
   imagePic.alt = imageData.name;
   imageName.textContent = imageData.name;
+  imageCloseBtn.addEventListener("click", () => closeModal(imageModal));
 }
 
 function getCardElement(cardData) {
