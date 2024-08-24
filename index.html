@@ -106,7 +106,13 @@
         </form>
       </div>
     </div>
-
+    <div class="modal image__modal">
+      <div class="image__content">
+        <img class="image__picture" src="" alt="" />
+        <p class="image__name"></p>
+        <button class="modal__close-button image__close-btn"></button>
+      </div>
+    </div>
     <template id="js-card-template">
       <li class="card">
         <button type="button" class="card__delete-button"></button>
@@ -116,13 +122,6 @@
           <button type="button" aria-label="Like" class="card__like"></button>
         </div>
       </li>
-      <div class="modal image__modal">
-        <div class="image__content">
-          <img class="image__picture" src="" alt="" />
-          <p class="image__name"></p>
-          <button class="modal__close-button image__close-btn"></button>
-        </div>
-      </div>
     </template>
     <script src="./scripts/index.js"></script>
   </body>

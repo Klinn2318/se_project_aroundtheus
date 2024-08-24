@@ -37,6 +37,7 @@ const profileTitle = profile.querySelector(".profile__title");
 const profileDescription = profile.querySelector(".profile__description");
 const profileEditButton = profile.querySelector(".js-profile-edit-button");
 const cardAddBtn = profile.querySelector("#js-profile-add-button");
+const closeBtns = document.querySelectorAll(".modal__close-button");
 
 //TEMPLATES
 const templateGallery = document.querySelector("#js-card-template").content;
@@ -62,16 +63,15 @@ function deleteElement(element, elementClass) {
   return element.closest(elementClass).remove();
 }
 
-function getImageModal(element, imageData) {
-  const imageModal = element.querySelector(".image__modal");
-  const imagePic = element.querySelector(".image__picture");
-  const imageName = element.querySelector(".image__name");
-  const imageCloseBtn = element.querySelector(".modal__close-button");
+function getImageModal(imageData) {
+  const imageModal = document.querySelector(".image__modal");
+  const imagePic = imageModal.querySelector(".image__picture");
+  const imageName = imageModal.querySelector(".image__name");
 
-  imagePic.src = imageData.link;
-  imagePic.alt = imageData.name;
-  imageName.textContent = imageData.name;
-  imageCloseBtn.addEventListener("click", () => closeModal(imageModal));
+  imagePic.src = imageData.src;
+  imagePic.alt = imageData.alt;
+  imageName.textContent = imageData.alt;
+  openModal(imageModal);
 }
 
 function getCardElement(cardData) {
@@ -80,8 +80,6 @@ function getCardElement(cardData) {
   const cardTitle = cardElement.querySelector(".card__title");
   const cardLike = cardElement.querySelector(".card__like");
   const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
-  const imageModal = cardElement.querySelector(".image__modal");
-  getImageModal(cardElement, cardData);
 
   cardLike.addEventListener("click", () =>
     cardLike.classList.toggle("card__like_actived")
@@ -89,7 +87,7 @@ function getCardElement(cardData) {
   cardDeleteBtn.addEventListener("click", () =>
     deleteElement(cardDeleteBtn, ".card")
   );
-  cardImage.addEventListener("click", () => openModal(imageModal));
+  cardImage.addEventListener("click", () => getImageModal(cardImage));
   cardImage.src = cardData.link;
   cardImage.alt = cardData.name;
   cardTitle.textContent = cardData.name;
@@ -135,9 +133,7 @@ initialCards.forEach((cardData) => {
   galleryList.append(cardElement);
 });
 
-// Universal btn close
-const closeBtns = document.querySelectorAll(".modal__close-button");
-
+// UNIVERSAL CLOSE BTNS
 closeBtns.forEach((button) => {
   const popup = button.closest(".modal");
   button.addEventListener("click", () => closeModal(popup));
