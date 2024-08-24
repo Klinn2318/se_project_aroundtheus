@@ -25,28 +25,29 @@ const initialCards = [
   },
 ];
 
-const modal = document.querySelector(".js-modal");
+const editModal = document.querySelector(".edit-modal");
 const profile = document.querySelector(".profile");
+const page = document.querySelector(".page__container");
 const profileTitle = profile.querySelector(".profile__title");
 const profileDescription = profile.querySelector(".profile__description");
 const profileEditButton = profile.querySelector(".js-profile-edit-button");
-const profileAddButton = profile.querySelector("#js-profile-add-button");
-const modalCloseButton = modal.querySelector(".js-modal-close-button");
-const modalForm = modal.querySelector("#js-modal-form");
-const inputTitle = modal.querySelector("#input-title");
-const inputDescription = modal.querySelector("#input-description");
+const cardAddBtn = profile.querySelector("#js-profile-add-button");
+const modalCloseButton = editModal.querySelector(".edit-modal-close-button");
+const modalForm = editModal.querySelector("#edit-modal-form");
+const inputTitle = editModal.querySelector("#input-title");
+const inputDescription = editModal.querySelector("#input-description");
 const galleryList = document.querySelector("#js-gallery-list");
 const templateGallery = document.querySelector("#js-card-template").content;
 const templateImage = document.querySelector("#image-modal").content;
 
 function closePopUp() {
-  modal.classList.remove("modal_opened");
+  editModal.classList.remove("modal_opened");
 }
 
 profileEditButton.addEventListener("click", () => {
   inputDescription.value = profileDescription.textContent;
   inputTitle.value = profileTitle.textContent;
-  return modal.classList.add("modal_opened");
+  return editModal.classList.add("modal_opened");
 });
 
 modalCloseButton.addEventListener("click", closePopUp);
@@ -84,7 +85,7 @@ function getImageModal(imageData) {
   setTimeout(() => {
     toggleClass(imageModal, "image__opened");
   }, 10);
-  return modal.before(imageElement);
+  return page.after(imageElement);
 }
 
 function getCardElement(cardData) {

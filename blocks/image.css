@@ -35,9 +35,12 @@
 
 .image__name {
   color: white;
-  font-size: medium;
+  font-size: 12px;
+  line-height: 14.52px;
   font-family: inherit;
+  font-weight: 400;
   margin: 0;
+  margin-top: 10px;
 }
 
 .image__close-btn {
@@ -58,4 +61,18 @@
   right: -40px;
   top: -40px;
   transition: all 0.3s;
+}
+
+@media screen and (max-width: 621px) {
+  .image__close-btn {
+    right: 5px;
+    top: -46px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .image__picture {
+    min-width: 240px;
+    min-height: 299px;
+  }
 }

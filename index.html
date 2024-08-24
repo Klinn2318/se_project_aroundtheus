@@ -50,13 +50,15 @@
         <p class="footer__copyright">© 2022 Around The U.S.</p>
       </footer>
     </div>
-    <div class="modal js-modal">
+
+    <!-- Edit Profile Modal  -->
+    <div class="modal edit-modal">
       <div class="modal__container">
         <button
           type="button"
-          class="modal__close-button js-modal-close-button"
+          class="modal__close-button edit-modal-close-button"
         ></button>
-        <form class="modal__form form" id="js-modal-form">
+        <form class="modal__form form" id="edit-modal-form">
           <h2 class="form__title">Edit profile</h2>
           <input
             type="text"
@@ -76,6 +78,35 @@
         </form>
       </div>
     </div>
+
+    <!-- Add Card Modal  -->
+    <div class="modal add-modal">
+      <div class="modal__container">
+        <button
+          type="button"
+          class="modal__close-button add-modal-close-button"
+        ></button>
+        <form class="modal__form form" id="add-modal-form">
+          <h2 class="form__title">New Place</h2>
+          <input
+            type="text"
+            name="name"
+            class="form__input"
+            id="input-name"
+            placeholder="Title"
+          />
+          <input
+            type="text"
+            name="img"
+            id="input-img"
+            class="form__input"
+            placeholder="Image URL"
+          />
+          <button type="submit" class="form__save-button">Save</button>
+        </form>
+      </div>
+    </div>
+
     <template id="js-card-template">
       <li class="card">
         <button type="button" class="card__delete-button"></button>
