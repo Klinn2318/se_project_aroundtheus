@@ -1,8 +1,8 @@
-.image__modal {
+.preview {
   background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
-.image__content {
+.preview__content {
   position: relative;
   margin: auto;
   display: flex;
@@ -10,12 +10,12 @@
   gap: 0;
 }
 
-.image__picture {
+.preview__picture {
   max-width: 75vw;
   max-height: 75vh;
 }
 
-.image__name {
+.preview__name {
   color: white;
   font-size: 12px;
   line-height: 14.52px;
@@ -26,7 +26,7 @@
 }
 
 @media screen and (max-width: 621px) {
-  .image__picture {
+  .preview__picture {
     min-width: 240px;
     min-height: 299px;
   }

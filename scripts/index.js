@@ -28,7 +28,7 @@ const initialCards = [
 // WRAPPERS
 const editModal = document.querySelector(".edit-modal");
 const addModal = document.querySelector(".add-modal");
-const imageModal = document.querySelector(".image__modal");
+const imageModal = document.querySelector(".preview");
 const profile = document.querySelector(".profile");
 const page = document.querySelector(".page__container");
 const galleryList = document.querySelector("#js-gallery-list");
@@ -50,6 +50,8 @@ const addInputTitle = addModal.querySelector("#input-title");
 const editInputName = editModal.querySelector("#input-name");
 const addInputImg = addModal.querySelector("#input-img");
 const editInputDescription = editModal.querySelector("#input-description");
+const imagePic = imageModal.querySelector(".preview__picture");
+const imageName = imageModal.querySelector(".preview__name");
 
 // FUNCTIONS
 function openModal(element) {
@@ -65,9 +67,6 @@ function deleteElement(element, elementClass) {
 }
 
 function getImageModal(imageData) {
-  const imagePic = imageModal.querySelector(".image__picture");
-  const imageName = imageModal.querySelector(".image__name");
-
   imagePic.src = imageData.src;
   imagePic.alt = imageData.alt;
   imageName.textContent = imageData.alt;
