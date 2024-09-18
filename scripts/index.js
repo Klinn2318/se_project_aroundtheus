@@ -65,28 +65,29 @@ const imageName = imageModal.querySelector(".preview__name");
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
 function handleClose(event) {
-  const openedModal = document.querySelector(".modal_opened");
-  if (openedModal) {
-    // Close modal if clicking outside the container or pressing "Escape"
-    if (
-      event.type === "click" ||
-      (event.type === "keydown" && event.key === "Escape")
-    ) {
-      closeModal(openedModal);
-    }
+  // Close modal if clicking outside the container or pressing "Escape"
+  if (
+    event.type === "click" ||
+    (event.type === "keydown" && event.key === "Escape")
+  ) {
+    const openedModal = document.querySelector(".modal_opened");
+    closeModal(openedModal);
   }
 }
 
+const stopProp = (e) => e.stopPropagation();
+
 function openModal(element) {
   element.classList.add("modal_opened");
-  const container = element.querySelector(".js-modal__container");
-  container.addEventListener("click", (e) => e.stopPropagation());
+  const container = element.querySelector(".modal__container-js");
+  container.addEventListener("click", stopProp);
   element.addEventListener("click", handleClose);
   document.addEventListener("keydown", handleClose);
 }
 
 function closeModal(element) {
   element.classList.remove("modal_opened");
+  container.removeEventListener("click", stopProp);
   element.removeEventListener("click", handleClose);
   document.removeEventListener("keydown", handleClose);
 }
