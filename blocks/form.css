@@ -6,20 +6,22 @@
   box-sizing: border-box;
   border: none;
   border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 28.74px;
 }
 
-/* .form__input:focus-visible {
-  border-block-color: rgb(53, 94, 198);
-} */
-
-.form__input:not(:last-of-type) {
-  margin-bottom: 28.74px;
+.form__input:last-of-type {
+  margin-bottom: 0;
 }
 
 .form__input::placeholder {
   color: #000;
   font-size: 14px;
   font-weight: 400;
+}
+
+.form__input_type_error {
+  border-bottom: solid 1px rgb(255, 0, 0);
+  position: relative;
 }
 
 .form__title {
@@ -47,6 +49,20 @@
 
 .form__save-button:hover {
   opacity: 0.8;
+}
+
+.form__error {
+  font-size: 12px;
+  line-height: 15px;
+  color: red;
+  opacity: 0;
+  position: absolute;
+  margin-top: -28.74px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.form__error:last-of-type {
+  margin-top: 0;
 }
 
 @media screen and (max-width: 621px) {

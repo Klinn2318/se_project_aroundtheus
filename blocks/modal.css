@@ -58,6 +58,14 @@
   display: block;
 }
 
+.modal__error_visible {
+  opacity: 1 !important;
+}
+
+.modal__button_disabled {
+  opacity: 0.8 !important;
+}
+
 @media screen and (max-width: 621px) {
   .modal__container {
     max-width: 282px;
