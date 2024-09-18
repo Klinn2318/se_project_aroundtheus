@@ -7,11 +7,12 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   color: #000;
-  z-index: 99;
+  z-index: 1;
   padding: 0 2%;
   opacity: 0;
   visibility: hidden;
   transition: visibility 0s 0.5s, opacity 0.5s ease-in-out;
+  overflow: hidden;
 }
 
 .modal_opened {
@@ -56,6 +57,7 @@
 .modal__form {
   margin: 34px 36px 0;
   display: block;
+  z-index: 2;
 }
 
 .modal__error_visible {
