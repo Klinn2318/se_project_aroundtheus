@@ -34,6 +34,7 @@ const imageModal = document.querySelector(".preview");
 const profile = document.querySelector(".profile");
 const page = document.querySelector(".page__container");
 const galleryList = document.querySelector("#js-gallery-list");
+const container = document.querySelectorAll(".modal__container-js");
 
 /* -------------------------------------------------------------------------- */
 /*                            BUTTONS AND DOM NODES                           */
@@ -75,19 +76,14 @@ function handleClose(event) {
   }
 }
 
-const stopProp = (e) => e.stopPropagation();
-
 function openModal(element) {
   element.classList.add("modal_opened");
-  const container = element.querySelector(".modal__container-js");
-  container.addEventListener("click", stopProp);
   element.addEventListener("click", handleClose);
   document.addEventListener("keydown", handleClose);
 }
 
 function closeModal(element) {
   element.classList.remove("modal_opened");
-  container.removeEventListener("click", stopProp);
   element.removeEventListener("click", handleClose);
   document.removeEventListener("keydown", handleClose);
 }
@@ -177,3 +173,7 @@ const addCloseEvent = (elements) => {
 };
 
 addCloseEvent(closeBtns);
+
+container.forEach((el) => {
+  el.addEventListener("click", (e) => e.stopPropagation());
+});
