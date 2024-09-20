@@ -34,7 +34,7 @@ const imageModal = document.querySelector(".preview");
 const profile = document.querySelector(".profile");
 const page = document.querySelector(".page__container");
 const galleryList = document.querySelector("#js-gallery-list");
-const container = document.querySelectorAll(".modal__container-js");
+const modalContainers = document.querySelectorAll(".modal__container-js");
 
 /* -------------------------------------------------------------------------- */
 /*                            BUTTONS AND DOM NODES                           */
@@ -66,7 +66,7 @@ const imageName = imageModal.querySelector(".preview__name");
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
 function handleClose(event) {
-  // Close modal if clicking outside the container or pressing "Escape"
+  // Close modal if clicking outside the modalContainer or pressing "Escape"
   if (
     event.type === "click" ||
     (event.type === "keydown" && event.key === "Escape")
@@ -174,6 +174,6 @@ const addCloseEvent = (elements) => {
 
 addCloseEvent(closeBtns);
 
-container.forEach((el) => {
+modalContainers.forEach((el) => {
   el.addEventListener("click", (e) => e.stopPropagation());
 });
