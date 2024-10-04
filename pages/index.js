@@ -89,6 +89,7 @@ function closeModal(element) {
   element.classList.remove("modal_opened");
   element.removeEventListener("click", handleClose);
   document.removeEventListener("keydown", handleClose);
+  editFormValidator.resetValidation();
 }
 
 function getImageModal(imageData) {
@@ -123,7 +124,6 @@ editModalForm.addEventListener("submit", (event) => {
   event.preventDefault();
   profileTitle.textContent = editInputName.value;
   profileDescription.textContent = editInputDescription.value;
-  editFormValidator.resetValidation();
   editFormValidator.disableSubmitButton();
   closeModal(editModal);
 });
