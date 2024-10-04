@@ -28,10 +28,6 @@ const initialCards = [
   },
 ];
 
-initialCards.forEach((e) => {
-  const card = new Card(e);
-});
-
 /* -------------------------------------------------------------------------- */
 /*                                  WRAPPERS                                  */
 /* -------------------------------------------------------------------------- */
@@ -56,7 +52,6 @@ const closeBtns = document.querySelectorAll(".modal__close-button");
 /*                                  TEMPLATES                                 */
 /* -------------------------------------------------------------------------- */
 const templateCard = "#js-card-template";
-const templateGallery = document.querySelector("#js-card-template").content;
 
 /* -------------------------------------------------------------------------- */
 /*                                  FORM DATA                                 */
@@ -103,9 +98,14 @@ function getImageModal(imageData) {
   openModal(imageModal);
 }
 
+function createCard(item) {
+  const cardElement = new Card(item, templateCard, getImageModal);
+  return cardElement.getCard();
+}
+
 const renderCard = (cardData) => {
-  const cardElement = new Card(cardData, templateCard, getImageModal);
-  galleryList.prepend(cardElement.getCard());
+  const cardElement = createCard(cardData);
+  galleryList.prepend(cardElement);
 };
 
 /* -------------------------------------------------------------------------- */
@@ -123,6 +123,7 @@ editModalForm.addEventListener("submit", (event) => {
   event.preventDefault();
   profileTitle.textContent = editInputName.value;
   profileDescription.textContent = editInputDescription.value;
+  editFormValidator.resetValidation();
   editFormValidator.disableSubmitButton();
   closeModal(editModal);
 });
@@ -140,7 +141,6 @@ addModalForm.addEventListener("submit", (event) => {
   card.link = addInputImg.value;
   renderCard(card);
   addModalForm.reset();
-  addFormValidator.reset();
   addFormValidator.disableSubmitButton();
   closeModal(addModal);
 });
