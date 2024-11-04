@@ -7,7 +7,6 @@
     <meta name="author" content="Gabriel Reyes" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Around The U.S</title>
-    <link rel="stylesheet" href="pages/index.css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   </head>
   <body class="page">
@@ -15,14 +14,14 @@
       <header class="header">
         <img
           class="header__image"
-          src="./images/header_icon.svg"
+          src="<%=require('./images/header_icon.svg')%>"
           alt="header-icon"
         />
       </header>
       <main class="main">
         <section class="profile">
           <img
-            src="./images/avatar.jpg"
+            src="<%=require('./images/avatar.jpg')%>"
             alt="Jack-avatar"
             class="profile__avatar"
           />
@@ -145,6 +144,5 @@
         </div>
       </li>
     </template>
-    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>
