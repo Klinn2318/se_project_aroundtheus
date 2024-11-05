@@ -1,70 +1,31 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import "./index.css";
-
-const initialCards = [
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-];
-
-/* -------------------------------------------------------------------------- */
-/*                                  WRAPPERS                                  */
-/* -------------------------------------------------------------------------- */
-const editModal = document.querySelector(".edit-modal");
-const addModal = document.querySelector(".add-modal");
-const imageModal = document.querySelector(".preview");
-const profile = document.querySelector(".profile");
-const page = document.querySelector(".page__container");
-const galleryList = document.querySelector("#js-gallery-list");
-const modalContainers = document.querySelectorAll(".modal__container-js");
-
-/* -------------------------------------------------------------------------- */
-/*                            BUTTONS AND DOM NODES                           */
-/* -------------------------------------------------------------------------- */
-const profileTitle = profile.querySelector(".profile__title");
-const profileDescription = profile.querySelector(".profile__description");
-const profileEditButton = profile.querySelector(".js-profile-edit-button");
-const cardAddBtn = profile.querySelector("#js-profile-add-button");
-const closeBtns = document.querySelectorAll(".modal__close-button");
-
-/* -------------------------------------------------------------------------- */
-/*                                  TEMPLATES                                 */
-/* -------------------------------------------------------------------------- */
-const templateCard = "#js-card-template";
-
-/* -------------------------------------------------------------------------- */
-/*                                  FORM DATA                                 */
-/* -------------------------------------------------------------------------- */
-const addModalForm = addModal.querySelector("#add-modal-form");
-const editModalForm = editModal.querySelector("#edit-modal-form");
-const addInputTitle = addModal.querySelector("#input-title");
-const editInputName = editModal.querySelector("#input-name");
-const addInputImg = addModal.querySelector("#input-img");
-const editInputDescription = editModal.querySelector("#input-description");
-const imagePic = imageModal.querySelector(".preview__picture");
-const imageName = imageModal.querySelector(".preview__name");
+import {
+  initialCards,
+  editModal,
+  addModal,
+  imageModal,
+  profile,
+  page,
+  galleryList,
+  modalContainers,
+  profileTitle,
+  profileDescription,
+  profileEditButton,
+  cardAddBtn,
+  closeBtns,
+  templateCard,
+  addModalForm,
+  editModalForm,
+  addInputTitle,
+  editInputName,
+  addInputImg,
+  editInputDescription,
+  imagePic,
+  imageName,
+  validationConfig,
+} from "../utils/constants.js";
 
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
@@ -172,15 +133,6 @@ modalContainers.forEach((el) => {
 /* -------------------------------------------------------------------------- */
 /*                            For Validation Class                            */
 /* -------------------------------------------------------------------------- */
-
-const validationConfig = {
-  formSelector: ".modal__form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__save-button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "modal__error_visible",
-};
 
 const addFormValidator = new FormValidator(validationConfig, addModalForm);
 const editFormValidator = new FormValidator(validationConfig, editModalForm);
