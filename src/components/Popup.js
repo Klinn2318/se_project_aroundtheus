@@ -9,15 +9,15 @@ class Popup {
   _handleEscUp(evt) {
     evt.preventDefault();
 
-    if (evt.which === ESC_KEYCODE) {
+    if (evt.type === "keyup" && evt.which === ESC_KEYCODE) {
       this.close();
     }
   }
 
   setEventListeners() {
-    this._popupElement.addEventListener("click", (evt) => {
+    this._popupElement.addEventListener("mousedown", (evt) => {
       if (
-        evt.target.classList.contains("modal") ||
+        evt.target.classList.contains("modal__close-button") ||
         evt.target.classList.contains("modal_opened")
       ) {
         this.close();
@@ -27,14 +27,16 @@ class Popup {
 
   open() {
     this._popupElement.classList.add("modal_opened");
-    this._popupElement.addEventListener("click", handleClose);
-    document.addEventListener("keydown", handleClose);
+    document.addEventListener("keyup", (evt) => {
+      this._handleEscUp(evt);
+    });
   }
 
   close() {
     this._popupElement.classList.remove("modal_opened");
-    this._popupElement.removeEventListener("click", handleClose);
-    document.removeEventListener("keydown", handleClose);
+    document.removeEventListener("keyup", (evt) => {
+      this._handleEscUp(evt);
+    });
   }
 }
 

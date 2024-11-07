@@ -6,13 +6,13 @@ export default class User {
 
   getUserInfo() {
     return {
-      title: this._profileName.textContent,
-      description: this._jobElement.textContent,
+      title: this._name.textContent,
+      description: this._job.textContent,
     };
   }
 
   setUserInfo(UserData) {
-    this._profileName.textContent = UserData.title;
-    this._jobElement.textContent = UserData.description;
+    this._name.textContent = UserData.title;
+    this._job.textContent = UserData.description;
   }
 }

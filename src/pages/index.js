@@ -1,137 +1,109 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import PopupWithForm from "../components/Popup-with-form.js";
+import PopupWithImage from "../components/Popup-with-image.js";
+import User from "../components/User-info.js";
+import Section from "../components/Section.js";
 import "./index.css";
+
 import {
   initialCards,
-  editModal,
-  addModal,
-  imageModal,
-  profile,
-  page,
-  galleryList,
-  modalContainers,
   profileTitle,
   profileDescription,
   profileEditButton,
   cardAddBtn,
-  closeBtns,
-  templateCard,
+  validationConfig,
   addModalForm,
   editModalForm,
-  addInputTitle,
-  editInputName,
-  addInputImg,
-  editInputDescription,
-  imagePic,
-  imageName,
-  validationConfig,
 } from "../utils/constants.js";
 
 /* -------------------------------------------------------------------------- */
-/*                                  FUNCTIONS                                 */
+/*                              CLASS INSTANCES                               */
 /* -------------------------------------------------------------------------- */
-function handleClose(event) {
-  // Close modal if clicking outside the modalContainer or pressing "Escape"
-  if (
-    event.type === "click" ||
-    (event.type === "keydown" && event.key === "Escape")
-  ) {
-    const openedModal = document.querySelector(".modal_opened");
-    closeModal(openedModal);
-  }
-}
 
-function openModal(element) {
-  element.classList.add("modal_opened");
-  element.addEventListener("click", handleClose);
-  document.addEventListener("keydown", handleClose);
-}
+const user = new User({
+  name: profileTitle,
+  job: profileDescription,
+});
 
-function closeModal(element) {
-  element.classList.remove("modal_opened");
-  element.removeEventListener("click", handleClose);
-  document.removeEventListener("keydown", handleClose);
-}
+const editProfilePopup = new PopupWithForm({
+  popupSelector: "edit-modal",
+  handleFormSubmit: handleProfileEditSubmit,
+});
+editProfilePopup.setEventListeners();
 
+const addCardPopup = new PopupWithForm({
+  popupSelector: "add-modal",
+  handleFormSubmit: handleAddFormSubmit,
+});
+addCardPopup.setEventListeners();
+
+const previewImagePopup = new PopupWithImage("preview");
+previewImagePopup.setEventListeners();
+
+const cardSection = new Section(
+  {
+    renderer: (item) => renderCard(item),
+  },
+  "gallery__list"
+);
+
+/* -------------------------------------------------------------------------- */
+/*                               FUNCTIONS                                    */
+/* -------------------------------------------------------------------------- */
 function getImageModal(imageData) {
-  imagePic.src = imageData.src;
-  imagePic.alt = imageData.alt;
-  imageName.textContent = imageData.alt;
-  openModal(imageModal);
+  previewImagePopup.open({ link: imageData.src, name: imageData.alt });
 }
 
-function createCard(item) {
-  const cardElement = new Card(item, templateCard, getImageModal);
-  return cardElement.getCard();
+function handleProfileEditSubmit(inputData) {
+  user.setUserInfo({
+    title: inputData.title,
+    description: inputData.description,
+  });
 }
 
-const renderCard = (cardData) => {
+function handleAddFormSubmit(inputValues) {
+  cardSection.addItem(
+    createCard({ name: inputValues.name, link: inputValues.img })
+  );
+  addCardPopup.close();
+  addFormValidator.resetValidation();
+}
+
+function createCard(data) {
+  const card = new Card(data, "#js-card-template", getImageModal);
+  return card.getCard();
+}
+
+function renderCard(cardData) {
   const cardElement = createCard(cardData);
-  galleryList.prepend(cardElement);
-};
+  cardSection.addItem(cardElement);
+}
 
 /* -------------------------------------------------------------------------- */
-/*                                   EVENTS                                   */
+/*                                 EVENT LISTENERS                            */
 /* -------------------------------------------------------------------------- */
 
-/* ---------------------------- Edit-modal-events --------------------------- */
 profileEditButton.addEventListener("click", () => {
-  editInputDescription.value = profileDescription.textContent;
-  editInputName.value = profileTitle.textContent;
+  const userInfo = user.getUserInfo();
+  editProfilePopup.open();
+  editModalForm.elements.title.value = userInfo.title;
+  editModalForm.elements.description.value = userInfo.description;
   editFormValidator.resetValidation();
-  return openModal(editModal);
 });
 
-editModalForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  profileTitle.textContent = editInputName.value;
-  profileDescription.textContent = editInputDescription.value;
-  editFormValidator.disableSubmitButton();
-  closeModal(editModal);
+cardAddBtn.addEventListener("click", () => {
+  addCardPopup.open();
+  addFormValidator.resetValidation();
 });
 
-/* --------------------------- Add New Card Events -------------------------- */
-cardAddBtn.addEventListener("click", () => openModal(addModal));
-
-addModalForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const card = {
-    name: "",
-    link: "",
-  };
-  card.name = addInputTitle.value;
-  card.link = addInputImg.value;
-  renderCard(card);
-  addModalForm.reset();
-  addFormValidator.disableSubmitButton();
-  closeModal(addModal);
-});
-
-/* ------------------------ GENERATING INITIAL CARDS ------------------------ */
+/* ------------------------ INITIAL CARDS ------------------------ */
 initialCards.forEach((cardData) => {
   renderCard(cardData);
 });
 
 /* -------------------------------------------------------------------------- */
-/*                                Close Methods                               */
-/* -------------------------------------------------------------------------- */
-
-/* -------------------------- UNIVERSAL CLOSE BTNS -------------------------- */
-const addCloseEvent = (elements) => {
-  elements.forEach((el) => {
-    const popup = el.closest(".modal");
-    el.addEventListener("click", () => closeModal(popup));
-  });
-};
-
-addCloseEvent(closeBtns);
-
-modalContainers.forEach((el) => {
-  el.addEventListener("click", (e) => e.stopPropagation());
-});
-
-/* -------------------------------------------------------------------------- */
-/*                            For Validation Class                            */
+/*                           INSTANCES FORMVALIDATOR                          */
 /* -------------------------------------------------------------------------- */
 
 const addFormValidator = new FormValidator(validationConfig, addModalForm);
