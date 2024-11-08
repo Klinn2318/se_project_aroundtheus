@@ -60,6 +60,7 @@ function handleProfileEditSubmit(inputData) {
     title: inputData.title,
     description: inputData.description,
   });
+  editFormValidator.disableSubmitButton();
 }
 
 function handleAddFormSubmit(inputValues) {
