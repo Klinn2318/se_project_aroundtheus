@@ -1,8 +1,8 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import PopupWithForm from "../components/Popup-with-form.js";
-import PopupWithImage from "../components/Popup-with-image.js";
-import User from "../components/User-info.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
 import "./index.css";
 
@@ -21,7 +21,7 @@ import {
 /*                              CLASS INSTANCES                               */
 /* -------------------------------------------------------------------------- */
 
-const user = new User({
+const user = new UserInfo({
   name: profileTitle,
   job: profileDescription,
 });
@@ -67,7 +67,7 @@ function handleAddFormSubmit(inputValues) {
     createCard({ name: inputValues.name, link: inputValues.img })
   );
   addCardPopup.close();
-  addFormValidator.resetValidation();
+  addFormValidator.disableSubmitButton();
 }
 
 function createCard(data) {
@@ -94,13 +94,10 @@ profileEditButton.addEventListener("click", () => {
 
 cardAddBtn.addEventListener("click", () => {
   addCardPopup.open();
-  addFormValidator.resetValidation();
 });
 
 /* ------------------------ INITIAL CARDS ------------------------ */
-initialCards.forEach((cardData) => {
-  renderCard(cardData);
-});
+cardSection.renderItems(initialCards);
 
 /* -------------------------------------------------------------------------- */
 /*                           INSTANCES FORMVALIDATOR                          */

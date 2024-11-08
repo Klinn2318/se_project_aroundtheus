@@ -27,16 +27,12 @@ class Popup {
 
   open() {
     this._popupElement.classList.add("modal_opened");
-    document.addEventListener("keyup", (evt) => {
-      this._handleEscUp(evt);
-    });
+    document.addEventListener("keyup", this._handleEscUp);
   }
 
   close() {
     this._popupElement.classList.remove("modal_opened");
-    document.removeEventListener("keyup", (evt) => {
-      this._handleEscUp(evt);
-    });
+    document.removeEventListener("keyup", this._handleEscUp);
   }
 }
 
