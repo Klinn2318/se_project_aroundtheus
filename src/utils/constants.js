@@ -1,4 +1,5 @@
 export const ESC_KEYCODE = 27;
+export const token = "798db2b9-6b31-4f94-9460-e0bf9a1726e3";
 
 /* ------------------------------ INITIAL CARDS ----------------------------- */
 export const initialCards = [

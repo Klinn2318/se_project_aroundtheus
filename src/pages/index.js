@@ -5,6 +5,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
 import "./index.css";
+import Api from "../components/Api.js";
 
 import {
   initialCards,
@@ -15,6 +16,7 @@ import {
   validationConfig,
   addModalForm,
   editModalForm,
+  token,
 } from "../utils/constants.js";
 
 /* -------------------------------------------------------------------------- */
@@ -56,19 +58,28 @@ function getImageModal(imageData) {
 }
 
 function handleProfileEditSubmit(inputData) {
-  user.setUserInfo({
-    title: inputData.title,
-    description: inputData.description,
-  });
-  editFormValidator.disableSubmitButton();
+  api
+    .updateUserInfo({ name: inputData.title, about: inputData.description })
+    .then((updatedData) => {
+      user.setUserInfo({
+        title: updatedData.name,
+        description: updatedData.about,
+      });
+      editProfilePopup.close();
+    })
+    .catch((err) => console.error(err))
+    .finally(() => editFormValidator.disableSubmitButton());
 }
 
 function handleAddFormSubmit(inputValues) {
-  cardSection.addItem(
-    createCard({ name: inputValues.name, link: inputValues.img })
-  );
-  addCardPopup.close();
-  addFormValidator.disableSubmitButton();
+  api
+    .addCard({ name: inputValues.name, link: inputValues.img })
+    .then((newCard) => {
+      cardSection.addItem(createCard(newCard));
+      addCardPopup.close();
+    })
+    .catch((err) => console.error(err))
+    .finally(() => addFormValidator.disableSubmitButton());
 }
 
 function createCard(data) {
@@ -97,8 +108,28 @@ cardAddBtn.addEventListener("click", () => {
   addCardPopup.open();
 });
 
-/* ------------------------ INITIAL CARDS ------------------------ */
-cardSection.renderItems(initialCards);
+/* -------------------------------------------------------------------------- */
+/*                                  PROJECT 9                                 */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------- Loading Initial Cards ------------------------- */
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: token,
+    "Content-Type": "application/json",
+  },
+});
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    // Set user info
+    user.setUserInfo({ title: userData.name, description: userData.about });
+
+    // Render initial cards
+    cardSection.renderItems(cards);
+  })
+  .catch((err) => console.error(err));
 
 /* -------------------------------------------------------------------------- */
 /*                           INSTANCES FORMVALIDATOR                          */
