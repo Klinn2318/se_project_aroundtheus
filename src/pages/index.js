@@ -2,13 +2,13 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import PopupDelete from "../components/PopupDelete.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
 import "./index.css";
 import Api from "../components/Api.js";
 
 import {
-  initialCards,
   profileTitle,
   profileDescription,
   profileEditButton,
@@ -16,7 +16,10 @@ import {
   validationConfig,
   addModalForm,
   editModalForm,
+  avatarModalForm,
+  deleteModalForm,
   token,
+  avatar,
 } from "../utils/constants.js";
 
 /* -------------------------------------------------------------------------- */
@@ -26,6 +29,7 @@ import {
 const user = new UserInfo({
   name: profileTitle,
   job: profileDescription,
+  avatar: avatar,
 });
 
 const editProfilePopup = new PopupWithForm({
@@ -39,6 +43,12 @@ const addCardPopup = new PopupWithForm({
   handleFormSubmit: handleAddFormSubmit,
 });
 addCardPopup.setEventListeners();
+
+const avatarPopup = new PopupWithForm({
+  popupSelector: "avatar-modal",
+  handleFormSubmit: handleAvatarFormSubmit,
+});
+avatarPopup.setEventListeners();
 
 const previewImagePopup = new PopupWithImage("preview");
 previewImagePopup.setEventListeners();
@@ -57,21 +67,26 @@ function getImageModal(imageData) {
   previewImagePopup.open({ link: imageData.src, name: imageData.alt });
 }
 
-function handleProfileEditSubmit(inputData) {
+function handleProfileEditSubmit(inputData, saveBtn) {
+  renderSaving(true, saveBtn);
   api
     .updateUserInfo({ name: inputData.title, about: inputData.description })
     .then((updatedData) => {
       user.setUserInfo({
-        title: updatedData.name,
+        name: updatedData.name,
         description: updatedData.about,
       });
       editProfilePopup.close();
     })
     .catch((err) => console.error(err))
-    .finally(() => editFormValidator.disableSubmitButton());
+    .finally(() => {
+      renderSaving(false, saveBtn);
+      editFormValidator.disableSubmitButton();
+    });
 }
 
-function handleAddFormSubmit(inputValues) {
+function handleAddFormSubmit(inputValues, saveBtn) {
+  renderSaving(true, saveBtn);
   api
     .addCard({ name: inputValues.name, link: inputValues.img })
     .then((newCard) => {
@@ -79,17 +94,94 @@ function handleAddFormSubmit(inputValues) {
       addCardPopup.close();
     })
     .catch((err) => console.error(err))
-    .finally(() => addFormValidator.disableSubmitButton());
+    .finally(() => {
+      renderSaving(false, saveBtn);
+      addFormValidator.disableSubmitButton();
+    });
+}
+
+function handleAvatarFormSubmit(inputValues, saveButton) {
+  renderSaving(true, saveButton);
+  api
+    .updateUserAvatar({ avatar: inputValues.avatar })
+    .then((data) => {
+      user.updateAvatar({ avatar: data.avatar });
+      avatarPopup.close();
+      avatarFormValidator.resetValidation();
+      avatarModalForm.reset();
+    })
+    .catch((err) => {
+      console.error("Unable to update avatar", err);
+      alert("Avatar Update Failed, please try again");
+    })
+    .finally(() => {
+      renderSaving(false, saveButton);
+    });
 }
 
 function createCard(data) {
-  const card = new Card(data, "#js-card-template", getImageModal);
+  const card = new Card(
+    data,
+    "#js-card-template",
+    getImageModal,
+    (cardId, card) => {
+      deleteCardModal(cardId, card);
+    },
+    (cardId, card) => {
+      handleCardLike(cardId, card);
+    }
+  );
   return card.getCard();
+}
+
+function deleteCardModal(cardId, card) {
+  deleteModConfirm.setSubmitFunction(() => {
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        card.handleDeleteCard();
+        deleteModConfirm.close();
+      })
+      .catch((err) =>
+        console.error("Error when trying to delete the card: ", err)
+      );
+  });
+  deleteModConfirm.open();
+}
+
+function handleCardLike(card) {
+  if (!card.isliked) {
+    api
+      .likeCard(card.id)
+      .then((data) => {
+        console.log(data);
+        card.handleUpdateLikeCard(true);
+      })
+      .catch((err) => console.error("Error while adding the card: ", err));
+  } else {
+    api
+      .likeCard(card.id)
+      .then((data) => {
+        card.handleUpdateLikeCard(false);
+        console.log(data);
+      })
+      .catch((err) =>
+        console.error("Error when removing like from card: ", err)
+      );
+  }
 }
 
 function renderCard(cardData) {
   const cardElement = createCard(cardData);
   cardSection.addItem(cardElement);
+}
+
+function renderSaving(isLoading, buttonElement, defaultText = "Save") {
+  if (isLoading) {
+    buttonElement.textContent = "Saving...";
+  } else {
+    buttonElement.textContent = defaultText;
+  }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -112,6 +204,11 @@ cardAddBtn.addEventListener("click", () => {
 /*                                  PROJECT 9                                 */
 /* -------------------------------------------------------------------------- */
 
+/* ------------------- Popup Confirmation Delete Settings ------------------- */
+
+const deleteModConfirm = new PopupDelete("delete-modal"); //CHECK IF PROBLEMS
+deleteModConfirm.setEventListeners();
+
 /* -------------------------- Loading Initial Cards ------------------------- */
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -125,11 +222,19 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
     // Set user info
     user.setUserInfo({ title: userData.name, description: userData.about });
+    user.updateAvatar({ avatar: userData.avatar });
 
-    // Render initial cards
     cardSection.renderItems(cards);
   })
-  .catch((err) => console.error(err));
+  .catch((err) => {
+    console.error(err);
+    alert("We didn't get the user data. Try again please :(");
+  });
+
+const avatarEditBtn = document.querySelector(".profile__avatar-edit-btn");
+avatarEditBtn.addEventListener("click", () => {
+  avatarPopup.open();
+});
 
 /* -------------------------------------------------------------------------- */
 /*                           INSTANCES FORMVALIDATOR                          */
@@ -137,6 +242,11 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
 const addFormValidator = new FormValidator(validationConfig, addModalForm);
 const editFormValidator = new FormValidator(validationConfig, editModalForm);
+const avatarFormValidator = new FormValidator(
+  validationConfig,
+  avatarModalForm
+);
 
 addFormValidator.enableValidation();
 editFormValidator.enableValidation();
+avatarFormValidator.enableValidation();

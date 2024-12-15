@@ -1,37 +1,11 @@
 export const ESC_KEYCODE = 27;
 export const token = "798db2b9-6b31-4f94-9460-e0bf9a1726e3";
 
-/* ------------------------------ INITIAL CARDS ----------------------------- */
-export const initialCards = [
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-];
-
 /* ------------------------------ DOM CONSTANTS ----------------------------- */
 export const editModal = document.querySelector(".edit-modal");
 export const addModal = document.querySelector(".add-modal");
+export const avatarModal = document.querySelector(".avatar-modal");
+export const deleteModal = document.querySelector(".delete-modal");
 export const imageModal = document.querySelector(".preview");
 export const profile = document.querySelector(".profile");
 export const page = document.querySelector(".page__container");
@@ -45,6 +19,7 @@ export const profileTitle = profile.querySelector(".profile__title");
 export const profileDescription = profile.querySelector(
   ".profile__description"
 );
+export const avatar = profile.querySelector(".profile__avatar-img");
 export const profileEditButton = profile.querySelector(
   ".js-profile-edit-button"
 );
@@ -61,6 +36,8 @@ export const addModalForm = addModal.querySelector("#add-modal-form");
 export const editModalForm = editModal.querySelector("#edit-modal-form");
 export const addInputTitle = addModal.querySelector("#input-title");
 export const editInputName = editModal.querySelector("#input-name");
+export const avatarModalForm = avatarModal.querySelector("#avatar-modal-form");
+export const deleteModalForm = deleteModal.querySelector("#delete-modal-form");
 export const addInputImg = addModal.querySelector("#input-img");
 export const editInputDescription =
   editModal.querySelector("#input-description");
