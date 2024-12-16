@@ -134,22 +134,26 @@
     <!-- ----------------------------------------------------------------------- -->
 
     <div class="modal avatar-modal">
-      <div class="modal__container modal__container-js">
+      <div class="modal__container modal__container-alt modal__container-js">
         <button
           type="button"
           class="modal__close-button avatar-modal-close-button"
         ></button>
-        <form class="modal__form form" id="avatar-modal-form" novalidate>
+        <form
+          class="modal__form form alt-modal-form"
+          id="avatar-modal-form"
+          novalidate
+        >
           <h2 class="form__title">Change Profile Picture</h2>
           <input
             type="url"
-            name="img"
+            name="avatar"
             id="input-avatar"
             class="form__input"
             placeholder="Image URL"
             required
           />
-          <span class="form__error" id="input-img-error"></span>
+          <span class="form__error" id="input-avatar-error"></span>
           <button type="submit" class="form__save-button">Save</button>
         </form>
       </div>
@@ -171,18 +175,20 @@
     <!-- ----------------------------------------------------------------------- -->
 
     <div class="modal delete-modal">
-      <div class="modal__container modal__container-js">
+      <div class="modal__container modal__container-alt modal__container-js">
         <button
           type="button"
           class="modal__close-button delete-modal-close-button"
         ></button>
         <form
-          class="modal__form form delete-modal-form"
+          class="modal__form form alt-modal-form"
           id="delete-modal-form"
           novalidate
         >
-          <h2 class="form__title">Are You Sure?</h2>
-          <button type="submit" class="form__save-button">Save</button>
+          <h2 class="form__title" id="delete-modal-title">Are You Sure?</h2>
+          <button type="submit" class="form__save-button" id="delete-modal-btn">
+            Save
+          </button>
         </form>
       </div>
     </div>

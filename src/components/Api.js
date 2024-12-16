@@ -45,7 +45,6 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(data),
     }).then(this._handleResponse);
-    // .catch(this._handleError);
   }
 
   addCard(data) {
@@ -70,7 +69,6 @@ export default class Api {
       method: "PUT",
       headers: this._headers,
     }).then(this._handleResponse);
-    // .catch(this._handleError);
   }
 
   dislikeCard(cardId) {
@@ -78,6 +76,5 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     }).then(this._handleResponse);
-    // .catch(this._handleError);
   }
 }

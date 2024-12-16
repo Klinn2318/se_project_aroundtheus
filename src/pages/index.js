@@ -63,6 +63,7 @@ const cardSection = new Section(
 /* -------------------------------------------------------------------------- */
 /*                               FUNCTIONS                                    */
 /* -------------------------------------------------------------------------- */
+
 function getImageModal(imageData) {
   previewImagePopup.open({ link: imageData.src, name: imageData.alt });
 }
@@ -73,7 +74,7 @@ function handleProfileEditSubmit(inputData, saveBtn) {
     .updateUserInfo({ name: inputData.title, about: inputData.description })
     .then((updatedData) => {
       user.setUserInfo({
-        name: updatedData.name,
+        title: updatedData.name,
         description: updatedData.about,
       });
       editProfilePopup.close();
@@ -127,10 +128,11 @@ function createCard(data) {
     (cardId, card) => {
       deleteCardModal(cardId, card);
     },
-    (cardId, card) => {
-      handleCardLike(cardId, card);
+    (card) => {
+      handleCardLike(card);
     }
   );
+  // console.log(card)
   return card.getCard();
 }
 
@@ -150,25 +152,22 @@ function deleteCardModal(cardId, card) {
 }
 
 function handleCardLike(card) {
-  if (!card.isliked) {
-    api
-      .likeCard(card.id)
-      .then((data) => {
-        console.log(data);
-        card.handleUpdateLikeCard(true);
-      })
-      .catch((err) => console.error("Error while adding the card: ", err));
-  } else {
-    api
-      .likeCard(card.id)
-      .then((data) => {
-        card.handleUpdateLikeCard(false);
-        console.log(data);
-      })
-      .catch((err) =>
-        console.error("Error when removing like from card: ", err)
-      );
-  }
+  const likeAction = card.isLiked
+    ? api.dislikeCard(card.id)
+    : api.likeCard(card.id);
+
+  likeAction
+    .then((data) => {
+      card.handleUpdateLikeCard(data.isLiked);
+    })
+    .catch((err) =>
+      console.error(
+        card.isLiked
+          ? "Error while removing like from card: "
+          : "Error while adding the card: ",
+        err
+      )
+    );
 }
 
 function renderCard(cardData) {
@@ -206,7 +205,7 @@ cardAddBtn.addEventListener("click", () => {
 
 /* ------------------- Popup Confirmation Delete Settings ------------------- */
 
-const deleteModConfirm = new PopupDelete("delete-modal"); //CHECK IF PROBLEMS
+const deleteModConfirm = new PopupDelete("delete-modal");
 deleteModConfirm.setEventListeners();
 
 /* -------------------------- Loading Initial Cards ------------------------- */
@@ -221,14 +220,19 @@ const api = new Api({
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
     // Set user info
-    user.setUserInfo({ title: userData.name, description: userData.about });
+    user.setUserInfo({
+      title: userData.name,
+      description: userData.about,
+      avatar: userData.avatar
+    });
     user.updateAvatar({ avatar: userData.avatar });
 
+    cards.sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt))
     cardSection.renderItems(cards);
   })
   .catch((err) => {
     console.error(err);
-    alert("We didn't get the user data. Try again please :(");
+    alert("An error occurred. Please try again later.");
   });
 
 const avatarEditBtn = document.querySelector(".profile__avatar-edit-btn");

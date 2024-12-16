@@ -1,6 +1,6 @@
 export default class Card {
   constructor(
-    { name, link, id, isLiked },
+    { name, link, _id, isLiked: _isLiked },
     cardSelector,
     handleImageClick,
     rmCardModal,
@@ -8,8 +8,8 @@ export default class Card {
   ) {
     this._name = name;
     this._image = link;
-    this._id = id; // CHECK IN CASE NOT WORKING, CHANGE ID =_ID
-    this._isLiked = isLiked;
+    this.id = _id;
+    this.isLiked = _isLiked;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._rmCardModal = rmCardModal;
@@ -18,7 +18,7 @@ export default class Card {
 
   _setEventListeners() {
     this._cardDeleteBtn.addEventListener("click", () =>
-      this._rmCardModal(this._id, this)
+      this._rmCardModal(this.id, this)
     );
     this._cardLike.addEventListener("click", () => this._handleLikeClick(this));
     this._cardImage.addEventListener("click", () => {
@@ -31,14 +31,14 @@ export default class Card {
     this._element = null;
   }
 
-  handleUpdateLikeCard(Liked) {
-    if (!Liked) {
-      this._cardLike.classList.remove("card__like_actived");
-    } else {
+  handleUpdateLikeCard(like) {
+    if (like) {
       this._cardLike.classList.add("card__like_actived");
+    } else {
+      this._cardLike.classList.remove("card__like_actived");
     }
 
-    this._isLiked = Liked;
+    this.isLiked = like;
   }
 
   _getTemplate() {
@@ -53,7 +53,7 @@ export default class Card {
     this._cardImage = this._element.querySelector(".card__image");
     this._cardTitle = this._element.querySelector(".card__title");
     this._cardLike = this._element.querySelector(".card__like");
-    if (this._isLiked) {
+    if (this.isLiked) {
       this._cardLike.classList.toggle("card__like_actived");
     }
     this._cardDeleteBtn = this._element.querySelector(".card__delete-button");

@@ -30,6 +30,23 @@
   position: relative;
 }
 
+.modal__container-alt {
+  height: auto;
+}
+
+.alt-modal-form {
+  margin: 34px 36px 36px !important;
+}
+
+#delete-modal-title {
+  margin: 0;
+  margin-bottom: 38px;
+}
+
+#delete-modal-btn {
+  margin: 0;
+}
+
 .modal__close-button {
   margin: 0;
   padding: 0;
