@@ -132,7 +132,6 @@ function createCard(data) {
       handleCardLike(card);
     }
   );
-  // console.log(card)
   return card.getCard();
 }
 
@@ -223,11 +222,11 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     user.setUserInfo({
       title: userData.name,
       description: userData.about,
-      avatar: userData.avatar
+      avatar: userData.avatar,
     });
     user.updateAvatar({ avatar: userData.avatar });
 
-    cards.sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt))
+    cards.sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt));
     cardSection.renderItems(cards);
   })
   .catch((err) => {
