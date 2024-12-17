@@ -80,9 +80,9 @@ function handleProfileEditSubmit(inputData, saveBtn) {
       editProfilePopup.close();
     })
     .catch((err) => console.error(err))
+    .then(editFormValidator.disableSubmitButton())
     .finally(() => {
       renderSaving(false, saveBtn);
-      editFormValidator.disableSubmitButton();
     });
 }
 
@@ -93,11 +93,12 @@ function handleAddFormSubmit(inputValues, saveBtn) {
     .then((newCard) => {
       cardSection.addItem(createCard(newCard));
       addCardPopup.close();
+      addModalForm.reset();
     })
     .catch((err) => console.error(err))
+    .then(addFormValidator.disableSubmitButton())
     .finally(() => {
       renderSaving(false, saveBtn);
-      addFormValidator.disableSubmitButton();
     });
 }
 
@@ -108,13 +109,13 @@ function handleAvatarFormSubmit(inputValues, saveButton) {
     .then((data) => {
       user.updateAvatar({ avatar: data.avatar });
       avatarPopup.close();
-      avatarFormValidator.resetValidation();
       avatarModalForm.reset();
     })
     .catch((err) => {
       console.error("Unable to update avatar", err);
       alert("Avatar Update Failed, please try again");
     })
+    .then(avatarFormValidator.disableSubmitButton())
     .finally(() => {
       renderSaving(false, saveButton);
     });
